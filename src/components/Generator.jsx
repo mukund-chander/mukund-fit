@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import SectionWrapper from "./SectionWrapper";
 import { SCHEMES, WORKOUTS } from "../utils/swoldier";
-import { useState } from "react";
 import Button from "./Button";
 
 function Header(props) {
@@ -8,10 +8,7 @@ function Header(props) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-center gap-2">
-        <p
-          className="text-3xl sm:text-4xl md:text-5xl
-        font-semibold text-slate-400"
-        >
+        <p className="text-3xl sm:text-4xl md:text-5xl font-semibold text-slate-400">
           {index}
         </p>
         <h4 className="text-xl sm:text-2xl md:text-3xl">{title}</h4>
@@ -25,25 +22,30 @@ export default function Generator(props) {
   const {
     muscles,
     setMuscles,
-    goal,
-    setGoal,
     poison,
     setPoison,
+    goal,
+    setGoal,
     updateWorkout,
   } = props;
   const [showModal, setShowModal] = useState(false);
 
+  // let showModal = false
+
   function toggleModal() {
     setShowModal(!showModal);
   }
+
   function updateMuscles(muscleGroup) {
     if (muscles.includes(muscleGroup)) {
       setMuscles(muscles.filter((val) => val !== muscleGroup));
       return;
     }
+
     if (muscles.length > 2) {
       return;
     }
+
     if (poison !== "individual") {
       setMuscles([muscleGroup]);
       setShowModal(false);
@@ -55,6 +57,7 @@ export default function Generator(props) {
       setShowModal(false);
     }
   }
+
   return (
     <SectionWrapper
       id={"generate"}
@@ -63,7 +66,7 @@ export default function Generator(props) {
     >
       <Header
         index={"01"}
-        title={"Pick your Poison"}
+        title={"Pick your poison"}
         description={"Select the workout you wish to endure."}
       />
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -75,8 +78,8 @@ export default function Generator(props) {
                 setPoison(type);
               }}
               className={
-                "bg-slate-950 border duration-200 px-4 hover:border-blue-600 py-3 rounded-lg " +
-                (type === poison ? " border-blue-600" : "border-blue-400")
+                "bg-slate-950 border  duration-200 px-4 hover:border-blue-600 py-3 rounded-lg " +
+                (type === poison ? " border-blue-600" : " border-blue-400")
               }
               key={typeIndex}
             >
@@ -88,7 +91,7 @@ export default function Generator(props) {
       <Header
         index={"02"}
         title={"Lock on targets"}
-        description={"Select the muscles judged for anihilation."}
+        description={"Select the muscles judged for annihilation."}
       />
       <div className="bg-slate-950  border border-solid border-blue-400 rounded-lg flex flex-col">
         <button
@@ -114,9 +117,7 @@ export default function Generator(props) {
                   key={muscleGroupIndex}
                   className={
                     "hover:text-blue-400 duration-200 " +
-                    muscles.includes(muscleGroup)
-                      ? " text-blue-400"
-                      : " "
+                    (muscles.includes(muscleGroup) ? " text-blue-400" : " ")
                   }
                 >
                   <p className="uppercase">
@@ -141,8 +142,8 @@ export default function Generator(props) {
                 setGoal(scheme);
               }}
               className={
-                "bg-slate-950 border duration-200 hover:border-blue-600 py-3 rounded-lg px-4 " +
-                (scheme === goal ? "border-blue-600" : "border-blue-400")
+                "bg-slate-950 border  duration-200 hover:border-blue-600 py-3 rounded-lg px-4 " +
+                (scheme === goal ? " border-blue-600" : " border-blue-400")
               }
               key={schemeIndex}
             >
